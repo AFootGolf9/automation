@@ -1,31 +1,18 @@
-import tkinter
-import pyautogui as gui
-import setup
-import time
+import requests
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 
-while not gui.pixelMatchesColor(35, 156, (255, 255, 255)):
-    time.sleep(1)
 
-found = False
-where = None
-while not found:
-    gui.scroll(-10)
-    img = gui.screenshot()
-    for i in range(0, 1080, 10):
-        color = img.getpixel((500, i))
-        where = i
-        if color == (0, 120, 242, 255):
-            found = True
-            break
+def get_free_game():
+    # Make a request to the Epic Games API to get the free game information
+    response = requests.get("https://store-site-backend-static-ipv4.ak.epicgames.com/freeGamesPromotions")
 
-gui.moveTo(500, where-50)
-gui.click()
+    # Check the response status code to determine if the request was successful
+    if response.status_code == 200:
+        game_info = response.json()
+        game_name= game_info['data']['Catalog']['searchStore']['elements'][0]['productSlug']
+        return game_name
+    else:
+        print("Failed to retrieve the free game information.")
 
-time.sleep(3)
-gui.click(956, 722)
-time.sleep(3)
-gui.click(1500, 840)
-time.sleep(5)
-gui.click(1400, 1000)
-time.sleep(5)
-gui.click(1900, 55)
+freeGame = get_free_game()
