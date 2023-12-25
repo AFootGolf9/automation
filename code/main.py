@@ -16,3 +16,28 @@ def get_free_game():
         print("Failed to retrieve the free game information.")
 
 freeGame = get_free_game()
+
+# Initialize the Chrome driver
+driver = webdriver.Chrome()
+
+# Navigate to the Epic Games Store
+driver.get("https://www.epicgames.com/store/en-US/")
+
+# Log in to your account
+# Note: You'll need to handle the login process here
+
+# Navigate to the game page
+driver.get("https://www.epicgames.com/store/en-US/p/" + freeGame)  # replace 'game-name' with the actual game name
+
+# Click on the 'Buy' button
+buy_button = driver.find_element_by_css_selector("button.buy-button")
+buy_button.click()
+
+# Handle the checkout process
+# Note: You'll need to handle the checkout process here
+
+# Confirm the purchase
+# Note: You'll need to handle the purchase confirmation here
+
+# Close the browser
+driver.quit()
