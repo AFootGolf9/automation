@@ -1,6 +1,7 @@
 import requests
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+import time
 
 
 def get_free_game():
@@ -28,9 +29,22 @@ driver.get("https://www.epicgames.com/store/en-US/")
 
 # Navigate to the game page
 driver.get("https://www.epicgames.com/store/en-US/p/" + freeGame)  # replace 'game-name' with the actual game name
+#time.sleep(200)
+
+time.sleep(10)
+while True:
+    try:
+        driver.refresh()
+        time.sleep(5)
+        driver.find_element("challenge-stage").click()
+        print("Captcha found")
+    except:
+        time.sleep(5)
+        print("No captcha") 
+        break    
 
 # Click on the 'Buy' button
-buy_button = driver.find_element_by_css_selector("button.buy-button")
+buy_button = driver.find_element("button.buy-button")
 buy_button.click()
 
 # Handle the checkout process
