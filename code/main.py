@@ -1,3 +1,5 @@
+# Script to get free epic games
+
 import tkinter
 import pyautogui as gui
 import setup
@@ -21,13 +23,13 @@ while not found:
 gui.moveTo(500, where-50)
 gui.click()
 
+time.sleep(5)
+gui.click(950, 690)
 time.sleep(3)
-for i in range(650, 800, 5):
+for i in range(650, 900, 5):
     gui.click(1400, i)
     time.sleep(0.1)
-time.sleep(10)
-#gui.click(1500, 840)
-#time.sleep(5)
+time.sleep(5)
 gui.click(1400, 1000)
 time.sleep(10)
 gui.click(1900, 55)
